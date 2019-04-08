@@ -1,0 +1,41 @@
+<div class="button-row">
+  <a mat-raised-button color="primary" [routerLink]="['/game-create']"><mat-icon>add</mat-icon></a>
+  <a style="margin-left: 100px; align:left" *ngIf="authService.isLoggedIn" class="mat-card-header">Welcome, {{authService.user.email}}</a>
+  <a style="margin-left: 250px; align:left" *ngIf="authService.isLoggedIn" class="mat-tab-link" (click)="authService.logout()">Logout</a>
+
+</div>
+
+<div class="example-container mat-elevation-z8">
+  <table mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Game Name Column -->
+    <ng-container matColumnDef="game_name">
+      <th mat-header-cell *matHeaderCellDef> Game Name </th>
+      <td mat-cell *matCellDef="let element" class="isbn-col"> {{element.game_name}} </td>
+    </ng-container>
+
+    <!-- Team Column -->
+    <ng-container matColumnDef="team">
+      <th mat-header-cell *matHeaderCellDef> Team </th>
+      <td mat-cell *matCellDef="let element"> {{element.team}} </td>
+    </ng-container>
+
+    <!-- Organizer Column -->
+    <ng-container matColumnDef="organizer">
+      <th mat-header-cell *matHeaderCellDef> Organizer </th>
+      <td mat-cell *matCellDef="let element"> {{element.organizer}} </td>
+    </ng-container>
+
+    <!-- Contact Organizer Column -->
+    <ng-container matColumnDef="contact_org">
+      <th mat-header-cell *matHeaderCellDef> Contact Organizer </th>
+      <td mat-cell *matCellDef="let element"> {{element.contact_org}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/game-details/', row._id]"></tr>
+  </table>
+</div>
